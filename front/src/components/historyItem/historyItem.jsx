@@ -6,7 +6,7 @@ import mediaManager from '../mediaManager/mediaManager';
 import { useNavigate } from 'react-router-dom';
 import { backendIp } from '../../utils/request';
 
-function HistoryItem({}) {
+function HistoryItem({airdrop}) {
   const navigate = useNavigate()
   return  <Box sx={{display: 'flex', flexDirection: 'row', justifySelf: 'center', marginLeft: 0, gap: 2, borderBottom: "1px solid", borderColor: "rgba(255, 255, 255, 0.3)", minWidth: '100%', padding: 1, paddingBottom: 3}}>
     <Box>
@@ -15,8 +15,8 @@ function HistoryItem({}) {
     <Box sx={{display: 'flex', flexDirection: 'row', gap: 15}}>
         <Box>
             <Box sx={{display: "flex", flexDirection: 'column'}}>
-                <Typography color={"white"} fontSize={22} fontWeight={"Bold"}>AIRDROP TON</Typography>
-                <Typography color={"#63C67C"} fontSize={18} fontWeight={"Bold"}>+100 TON</Typography>
+                <Typography color={"white"} fontSize={22} fontWeight={"Bold"}>AIRDROP {airdrop.airdropName}</Typography>
+                <Typography color={"#63C67C"} fontSize={18} fontWeight={"Bold"}>+{airdrop.profit} {airdrop.airdropName}</Typography>
             </Box>
         </Box>
         <Box sx={{justifyContent: 'center', alignSelf: 'center'}}>

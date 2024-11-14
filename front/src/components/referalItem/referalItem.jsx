@@ -6,23 +6,38 @@ import mediaManager from '../mediaManager/mediaManager';
 import { useNavigate } from 'react-router-dom';
 import { backendIp } from '../../utils/request';
 
-function ReferalItem({}) {
+function ReferalItem({referal, count}) {
     const navigate = useNavigate()
-    return  <Box sx={{display: 'flex', flexDirection: 'row', justifySelf: 'center', marginLeft: 0, gap: 2, borderBottom: "1px solid",borderColor: "rgba(255, 255, 255, 0.3)", minWidth: '100%',
+    return  <Box sx={{display: 'flex', flexDirection: 'row', width: "100%", justifySelf: 'center', marginLeft: 0, gap: 2, borderBottom: "1px solid",borderColor: "rgba(255, 255, 255, 0.3)", minWidth: '100%',
     padding: 1,  paddingBottom: 3}}>
       <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-        <Typography color={"white"} fontSize={22} fontWeight={"Bold"} textAlign={'center'}>1</Typography>
-        <img src={mediaManager('referalAvatar')}/>
+        <Typography color={"white"} fontSize={22} fontWeight={"Bold"} textAlign={'center'}>{count + 1}</Typography>
+        <Box position="relative" display="inline-block">
+            <img src={mediaManager('referalAvatar')} style={{ width: '100%', height: 'auto' }} alt="Referal Avatar" />
+            <Typography 
+                color={"white"} 
+                fontSize={40} 
+                fontWeight={"bold"} 
+                textAlign={'center'} 
+                position="absolute" 
+                top="41%" 
+                left="50%" 
+                style={{ transform: 'translate(-50%, -50%)' }}
+            >
+                {referal.username.charAt(0)}
+            </Typography>
+        </Box>
       </Box>
       <Box sx={{display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center'}}>
           <Box>
                 <Box sx={{display: "flex", flexDirection: 'column'}}>
-                    <Typography color={"white"} fontSize={15} fontWeight={"Bold"}>Dmitriy K</Typography>
-                    <Typography color={"#757575"} fontSize={12} fontWeight={"Bold"}>15,999</Typography>
+                    <Typography color={"white"} fontSize={15} fontWeight={"Bold"}>{referal.username}</Typography>
+                    
                 </Box>
           </Box>
-          <Box sx={{justifyContent: 'center', alignSelf: 'center'}}>
-            <Typography color={"#00E5FF"} fontSize={18} fontWeight={"Bold"} textAlign={'center'}>150,577,999</Typography>
+          <Box sx={{justifyContent: 'center', alignSelf: 'center', display: 'flex', gap: 0.5}}>
+          <img src={mediaManager('referalCoinLogo')} />
+            <Typography color={"#00E5FF"} fontSize={15} fontWeight={"Bold"} textAlign={'center'}>{referal.profit}</Typography>
           </Box>
       </Box>
     </Box>

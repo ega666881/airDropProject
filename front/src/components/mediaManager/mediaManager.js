@@ -16,9 +16,9 @@ import airdropItemIcon from '../../assets/Rectangle 4179.svg'
 import airdropLogo from '../../assets/Group 212.svg'
 import referalAvatar from '../../assets/Frame 183.svg'
 import referalCountImage from '../../assets/Vector.svg'
-import tonLogo from '../../assets/Group 31.svg'
+import tonLogo from '../../assets/toncoin.svg'
 import connectWalletIcon from '../../assets/Group 170.svg'
-
+import referalCoinLogo from '../../assets/Group 110.svg'
 
 
 function mediaManager(assetName) {
@@ -41,6 +41,7 @@ function mediaManager(assetName) {
         referalAvatar: referalAvatar,
         tonLogo: tonLogo,
         connectWalletIcon: connectWalletIcon,
+        referalCoinLogo: referalCoinLogo,
     }
 
     if (assetName in assets) {

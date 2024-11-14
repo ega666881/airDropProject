@@ -5,27 +5,36 @@ import { observer } from 'mobx-react';
 import mediaManager from '../../components/mediaManager/mediaManager';
 import HistoryItem from '../../components/historyItem/historyItem';
 import NavBar from '../../components/nav/navBar';
+import clientStore from '../../stores/clientStore';
+import Loading from '../../components/loading/loading';
 
 function HomePage() {
-  return <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+  if (!clientStore.user) {
+    return <Loading />
+  }
+  return <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: "100%", overflowX: 'hidden'}}>
       <Slide direction='down' in={true} timeout={{enter: 800}}>
-        <Box>
-          <Box sx={{marginTop: 5}}>
-            <img src={mediaManager('logoIcon')} sizes=''/>
+        <Box maxWidth={"100%"}>
+          <Box>
+            <Box sx={{marginTop: 5, display: 'flex', justifyContent: 'center'}}>
+              <img src={mediaManager('logoIcon')} sizes=''/>
+            </Box>
           </Box>
-          <Box sx={{marginTop: 2}}>
-            <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"53px"} textAlign={"center"}>NAME</Typography>
-          </Box>
-          <Box sx={{marginTop: 2}}>
-            <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"22px"} textAlign={"center"}>ACTIVE</Typography>
-            <Typography variant='h3' fontWeight={"bold"} letterSpacing={"0px"} color={"#767676"} fontSize={"22px"} textAlign={"center"}>Subscription</Typography>
+          <Box>
+            <Box sx={{marginTop: 2, maxWidth: "100%"}}>
+              <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"53px"} textAlign={"center"}>{clientStore.user.username}</Typography>
+            </Box>
+            <Box sx={{marginTop: 2}}>
+              <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"22px"} textAlign={"center"}>ACTIVE</Typography>
+              <Typography variant='h3' fontWeight={"bold"} letterSpacing={"0px"} color={"#767676"} fontSize={"22px"} textAlign={"center"}>Subscription</Typography>
+            </Box>
           </Box>
         </Box>
       </Slide>
       <Slide direction='up' in={true} timeout={{enter: 800}}>
         <Box sx={{marginTop: 7, maxHeight: 250, overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF'}}>
-          {[1, 2, 3, 4, 1, 2, 3, 4].map(() => (
-            <HistoryItem />
+          {clientStore.user.airdropsHistory.map((airdrop) => (
+            <HistoryItem airdrop={airdrop}/>
           ))}
         </Box>
       </Slide>

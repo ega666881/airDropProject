@@ -14,7 +14,7 @@ function NavBar({activeButton}) {
         navigate(newActiveButton)
     }
 
-    return  <Box sx={{display: 'flex', flexDirection: 'row', marginTop: 5}}>
+    return  <Box sx={{display: 'flex', flexDirection: 'row', marginTop: 5, backgroundColor: 'black', width: '100%', justifyContent: 'center'}}>
         <Button onClick={() => changeActiveButton('')}><img src={activeButton === '' ? (mediaManager('homeIconActive')):(mediaManager('homeIcon'))}/></Button>
         <Button onClick={() => changeActiveButton('airdrop')}><img src={activeButton === 'airdrop' ? (mediaManager('airdropIconActive')):(mediaManager('airdropIcon'))}/></Button>
         <Button onClick={() => changeActiveButton('friends')}><img src={activeButton === 'friends' ? (mediaManager('friendsIconActive')):(mediaManager('friendsIcon'))}/></Button>

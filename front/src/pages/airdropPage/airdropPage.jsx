@@ -5,6 +5,8 @@ import { observer } from 'mobx-react';
 import mediaManager from '../../components/mediaManager/mediaManager';
 import NavBar from '../../components/nav/navBar';
 import AirdropItem from '../../components/airdropItem/airdropItem';
+import clientStore from '../../stores/clientStore';
+
 
 function AirDropPage() {
   return <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', maxHeight: "80vh", overflowY: 'hidden'}}>
@@ -23,8 +25,8 @@ function AirDropPage() {
       </Slide>
       <Slide direction='up' in={true} timeout={{enter: 800}}>
         <Box sx={{display: 'flex', flexDirection: 'column', marginTop: 7, maxHeight: "40vh", overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', gap: 3}}>
-            {[1, 2, 3, 4, 1, 2, 3, 4].map(() => (
-            <AirdropItem />
+            {clientStore.airdrops.map((airdrop) => (
+              <AirdropItem airdrop={airdrop} />
             ))}
         </Box>
       </Slide>

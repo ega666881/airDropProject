@@ -6,9 +6,10 @@ import mediaManager from '../../components/mediaManager/mediaManager';
 import NavBar from '../../components/nav/navBar';
 import AirdropItem from '../../components/airdropItem/airdropItem';
 import ReferalItem from '../../components/referalItem/referalItem';
+import clientStore from '../../stores/clientStore';
 
 function FriendsPage() {
-  return <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', maxHeight: "80vh", overflowX: 'hidden', padding: 5}}>
+  return <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', maxHeight: "80vh", overflowX: 'hidden', padding: 5, width: "80%"}}>
       <Slide direction='down' in={true} timeout={{enter: 800}}>
         <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <Box sx={{marginTop: 2}}>
@@ -17,14 +18,14 @@ function FriendsPage() {
         </Box>
       </Slide>
       <Slide direction='up' in={true} timeout={{enter: 800}}>
-        <Box>
+        <Box width={"100%"}>
             <Box sx={{display: 'flex', gap: 1, marginTop: 6}}>
                 <img src={mediaManager('referalCountImage')}/>
-                <Typography fontWeight={"regular"} letterSpacing={"1.57px"} color={"white"} fontSize={"18px"} textAlign={"center"}>20</Typography>
+                <Typography fontWeight={"regular"} letterSpacing={"1.57px"} color={"white"} fontSize={"18px"} textAlign={"center"}>{clientStore.user.referals.length}</Typography>
             </Box>
-            <Box sx={{display: 'flex', flexDirection: 'column', marginTop: 2, maxHeight: "60vh", overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', gap: 3}}>
-                {[1, 2, 3, 4, 1, 2, 3, 4].map(() => (
-                <ReferalItem />
+            <Box sx={{display: 'flex', flexDirection: 'column', marginTop: 2, maxHeight: "60vh", overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', gap: 3, width: "100%"}}>
+                {clientStore.user.referals.map((referal, index) => (
+                  <ReferalItem referal={referal} count={index}/>
                 ))}
             </Box>
         </Box>
