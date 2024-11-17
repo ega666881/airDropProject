@@ -30,6 +30,7 @@ async def startup():
 async def check_subscription(request: MessageRequest):
     try:
         user_channel_status = await bot.get_chat_member(chat_id=request.channelId, user_id = request.tgId)
+        print(user_channel_status)
         if user_channel_status != 'left':
             print('true')
             return {"status": "success", "check": True}
