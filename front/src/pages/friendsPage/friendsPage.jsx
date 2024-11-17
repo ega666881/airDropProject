@@ -28,6 +28,14 @@ function FriendsPage() {
                   <ReferalItem referal={referal} count={index}/>
                 ))}
             </Box>
+            <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%'}}>
+              <Button sx={{textTransform: 'none',backgroundColor: 'white', minWidth: '30vh', padding: 2}}>
+                        <a href={`https://t.me/CheckAirdropovbot?start=${clientStore.user.id}&text=`} sx={{textTransform: 'none', backgroundColor: 'white', minWidth: '40vh', padding: 2, color: 'white'}}>
+                    <Typography fontSize={20}>Invite Friends</Typography>
+                        </a>
+              </Button>
+            </Box>
+            
         </Box>
       </Slide>
   </Box>
