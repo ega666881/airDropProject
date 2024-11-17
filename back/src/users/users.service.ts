@@ -103,6 +103,7 @@ export class UsersService {
             tgId: user.tgId
           })})
           const data = await response.json()
+          console.log(data)
           if (data.check) {
             await this.userRepository.addAirdropsUsers(dto.airdropId, dto.userId)
             return this.userRepository.getUser(dto.userId)
