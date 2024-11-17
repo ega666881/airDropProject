@@ -1,0 +1,286 @@
+[
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Bot",
+        "importPath": "aiogram",
+        "description": "aiogram",
+        "isExtraImport": true,
+        "detail": "aiogram",
+        "documentation": {}
+    },
+    {
+        "label": "Dispatcher",
+        "importPath": "aiogram",
+        "description": "aiogram",
+        "isExtraImport": true,
+        "detail": "aiogram",
+        "documentation": {}
+    },
+    {
+        "label": "types",
+        "importPath": "aiogram",
+        "description": "aiogram",
+        "isExtraImport": true,
+        "detail": "aiogram",
+        "documentation": {}
+    },
+    {
+        "label": "F",
+        "importPath": "aiogram",
+        "description": "aiogram",
+        "isExtraImport": true,
+        "detail": "aiogram",
+        "documentation": {}
+    },
+    {
+        "label": "Bot",
+        "importPath": "aiogram",
+        "description": "aiogram",
+        "isExtraImport": true,
+        "detail": "aiogram",
+        "documentation": {}
+    },
+    {
+        "label": "Router",
+        "importPath": "aiogram",
+        "description": "aiogram",
+        "isExtraImport": true,
+        "detail": "aiogram",
+        "documentation": {}
+    },
+    {
+        "label": "F",
+        "importPath": "aiogram",
+        "description": "aiogram",
+        "isExtraImport": true,
+        "detail": "aiogram",
+        "documentation": {}
+    },
+    {
+        "label": "MemoryStorage",
+        "importPath": "aiogram.fsm.storage.memory",
+        "description": "aiogram.fsm.storage.memory",
+        "isExtraImport": true,
+        "detail": "aiogram.fsm.storage.memory",
+        "documentation": {}
+    },
+    {
+        "label": "Message",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "InlineKeyboardButton",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "InlineKeyboardMarkup",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "CallbackQuery",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "Message",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "ReplyKeyboardMarkup",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "KeyboardButton",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "KeyboardButtonPollType",
+        "importPath": "aiogram.types",
+        "description": "aiogram.types",
+        "isExtraImport": true,
+        "detail": "aiogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "start",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "start",
+        "description": "start",
+        "detail": "start",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "traceback",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
+        "documentation": {}
+    },
+    {
+        "label": "Command",
+        "importPath": "aiogram.filters",
+        "description": "aiogram.filters",
+        "isExtraImport": true,
+        "detail": "aiogram.filters",
+        "documentation": {}
+    },
+    {
+        "label": "CommandStart",
+        "importPath": "aiogram.filters",
+        "description": "aiogram.filters",
+        "isExtraImport": true,
+        "detail": "aiogram.filters",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "ReplyKeyboardBuilder",
+        "importPath": "aiogram.utils.keyboard",
+        "description": "aiogram.utils.keyboard",
+        "isExtraImport": true,
+        "detail": "aiogram.utils.keyboard",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "MessageRequest",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():\n    dp.include_router(start.router)\n    asyncio.create_task(dp.start_polling(bot))\n@app.post(\"/check-subscrition\")\nasync def check_subscription(request: MessageRequest):\n    try:",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "TELEGRAM_TOKEN",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "TELEGRAM_TOKEN = '7734073637:AAEY01wgogGBUCVRpaNjTVjihdFQJIxUJTQ'\nbot = Bot(token=TELEGRAM_TOKEN)\nstorage = MemoryStorage()\ndp = Dispatcher()\napp = FastAPI()\nclass MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "bot",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "bot = Bot(token=TELEGRAM_TOKEN)\nstorage = MemoryStorage()\ndp = Dispatcher()\napp = FastAPI()\nclass MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():\n    dp.include_router(start.router)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "storage",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "storage = MemoryStorage()\ndp = Dispatcher()\napp = FastAPI()\nclass MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():\n    dp.include_router(start.router)\n    asyncio.create_task(dp.start_polling(bot))",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "dp",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "dp = Dispatcher()\napp = FastAPI()\nclass MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():\n    dp.include_router(start.router)\n    asyncio.create_task(dp.start_polling(bot))\n@app.post(\"/check-subscrition\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = FastAPI()\nclass MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():\n    dp.include_router(start.router)\n    asyncio.create_task(dp.start_polling(bot))\n@app.post(\"/check-subscrition\")\nasync def check_subscription(request: MessageRequest):",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "start",
+        "description": "start",
+        "peekOfCode": "router = Router(name=__name__)\n@router.message(CommandStart())\nasync def adminMenu(message: Message):\n    body = {\"tgId\": message.from_user.id, \"username\": message.from_user.username}\n    try:\n        body['referalId'] = int(message.text[7:])\n    except:\n        pass\n    print(body)\n    response = requests.post('http://127.0.0.1:8000/api/users/create-user', json.dumps(body), headers={'content-type': 'application/json'})",
+        "detail": "start",
+        "documentation": {}
+    }
+]
