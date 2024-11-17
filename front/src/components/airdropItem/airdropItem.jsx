@@ -13,7 +13,7 @@ function AirdropItem({airdrop}) {
     const navigate = useNavigate()
     return  <Box sx={{display: 'flex', flexDirection: 'row', justifySelf: 'center', marginLeft: 0, gap: 2, borderBottom: "1px solid", borderColor: "rgba(255, 255, 255, 0.3)", minWidth: '100%', padding: 1, paddingBottom: 3}}>
         <Box>
-            <img src={mediaManager('airdropItemIcon')}/>
+            <img src={airdrop.coinLogoUrl} width={40} height={40}/>
         </Box>
         <Box sx={{display: 'flex', flexDirection: 'row', gap: 12}}>
             <Box>
