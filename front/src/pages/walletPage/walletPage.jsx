@@ -13,6 +13,7 @@ import clientStore from '../../stores/clientStore';
 function WalletPage() {
     const [tonConnectUI, setOptions] = useTonConnectUI()
     let subscribeCost = clientStore.settings.subscribeCost
+    let referalMoney = 0
     if (clientStore.settings.discount > 0) {
         subscribeCost = clientStore.settings.subscribeCost - (clientStore.settings.subscribeCost * clientStore.settings.discount / 100)
         clientStore.setSubscribeDiscount(subscribeCost)
@@ -22,9 +23,9 @@ function WalletPage() {
         clientStore.setSubscribeDiscount(subscribeCost)
     }
     if (clientStore.user.referalWallet) {
-        subscribeCost = subscribeCost - (subscribeCost * 40 / 100)
+        referalMoney = subscribeCost * 40 / 100
+        subscribeCost = subscribeCost - referalMoney
     }
-
     useEffect(() => {
         if (tonConnectUI.wallet) {
             clientStore.addWallet(tonConnectUI.wallet.account.address)
@@ -42,7 +43,7 @@ function WalletPage() {
             messages: [
               {
                 address: "UQAcZnseCeTDeJjeUap0Kl2HCkDX4AhChociGvUKvHnUbY7t",
-                amount: `${subscribeCost * 1000000000}`,
+                amount: `${subscribeCost.toFixed(2) * 1000000000}`,
                 payload: data.payload,
               },
               
@@ -54,7 +55,7 @@ function WalletPage() {
             transaction.messages.push(
                 {
                     address: clientStore.user.referalWallet,
-                    amount: `${(subscribeCost * 40 / 100) * 1000000000}`,
+                    amount: `${referalMoney * 1000000000}`,
                 },
             )
         }
