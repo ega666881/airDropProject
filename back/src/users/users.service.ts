@@ -25,6 +25,22 @@ export class UsersService {
   }
 
 
+  async createUser(dto: CreateUserDto) {
+    const user = await this.userRepository.getUser(undefined, dto.tgId)
+    if (user) {
+      throw new HttpException("Пользователь уже существует", HttpStatus.CONFLICT)
+
+    } else {
+      const insertedUser = await this.userRepository.createUser(dto.tgId, dto.username)
+      if (dto.referalId) {
+        await this.userRepository.addReferal(dto.referalId, insertedUser.id)
+      }
+
+      return this.userRepository.getUser(undefined, dto.tgId)
+    }
+    
+  }
+
   async getAirdrops(): Promise<IAirdrop[] | IAirdrop> {
     let airdops = await this.userRepository.getAirdrops()
     console.log(Math.floor((new Date().getTime() + 1000) / 1000))
@@ -126,7 +142,11 @@ export class UsersService {
               //@ts-ignore
               const referal = await this.knex('referals').select('*').leftJoin('users', 'users.id', 'referals.userId').where({referalId: updatedUser.id}).first()
               if (referal) {
-                if (referal.wallet.length > 0) updatedUser['referalWallet'] = referal.wallet
+                if (referal.wallet.length > 0) {
+                  const addProfit = trx.amount * 40 / 100
+                  await this.userRepository.updateReferalUser(referal.id, updatedUser.id, addProfit)
+                  updatedUser['referalWallet'] = referal.wallet
+                }
               }
               return updatedUser
             }

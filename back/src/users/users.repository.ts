@@ -21,15 +21,24 @@ export class UserRepository {
         this.knex = knexService.knex;
     }
 
-    async createUser(tgId: number): Promise<IUser> {
-        const insertedUser = await this.knex<IUser>(this.tableNames.users).insert({tgId: tgId, balance: 0}).returning('*')
+    async createUser(tgId: number, username: string): Promise<IUser> {
+        const insertedUser = await this.knex<IUser>(this.tableNames.users).insert({tgId: tgId, balance: 0, username: username}).returning('*')
         return insertedUser[0]
 
     }
 
+    async addReferal(userId: number, referalId: number) {
+        return this.knex(this.tableNames.referals).insert({userId: userId, referalId: referalId})
+    }
+
     async createTransaction(userId: number, amount: number = 0.1): Promise<ITransaction> {
-        const transaction = await this.knex(this.tableNames.transactions).insert({userId: userId, amount: amount}).returning('*')
+        const settings = await this.getSettings()
+        const transaction = await this.knex(this.tableNames.transactions).insert({userId: userId, amount: settings.subscribeCost}).returning('*')
         return transaction[0]
+    }
+
+    async updateReferalUser(userId: number, referalId: number, profit: number) {
+        await this.knex(this.tableNames.referals).update({profit: this.knex.raw((`profit + ${profit}`))}).where({userId: userId, referalId: referalId})
     }
 
     async getCountAirdropsUsers(airdropId: number) {

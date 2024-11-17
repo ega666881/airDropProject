@@ -70,6 +70,12 @@ export class UsersController {
   }
 
   @ApiTags('users')
+  @Post('/create-user')
+  async createUser(@Body() dto: CreateUserDto) {
+    return this.userService.createUser(dto)
+  }
+
+  @ApiTags('users')
   @Post('/add-coins')
   async addCoins(@Body() dto: AddCoinsDto) {
     return this.userService.addCoins(dto)

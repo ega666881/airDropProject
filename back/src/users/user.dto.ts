@@ -10,6 +10,15 @@ export class CreateUserDto {
     @ApiProperty()
     @IsNotEmpty()
     readonly tgId: number
+    @IsString()
+    @ApiProperty()
+    @IsNotEmpty()
+    readonly username: string
+    @IsNumber()
+    @ApiProperty()
+    @IsOptional()
+    readonly referalId: number
+    
 }
 
 export class AddWalletUserDto {
