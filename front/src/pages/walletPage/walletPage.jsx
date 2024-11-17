@@ -38,6 +38,7 @@ function WalletPage() {
         
         
         const transaction = {
+            validUntil: Math.floor(new Date() / 1000) + 360,
             messages: [
               {
                 address: "UQAcZnseCeTDeJjeUap0Kl2HCkDX4AhChociGvUKvHnUbY7t",
