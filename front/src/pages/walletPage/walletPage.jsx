@@ -75,7 +75,7 @@ function WalletPage() {
             </Box>
         </Slide>
         <Slide direction='up' in={true} timeout={{enter: 800}}>
-            <Box sx={{marginTop: 7, maxHeight: 250, overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF'}}>
+            <Box sx={{marginTop: 7, maxHeight: 250, overflowX: 'hidden', scrollbarColor: '#00E5FF'}}>
                 <Button sx={{textTransform: 'none', backgroundImage: tonConnectUI.wallet ? ("url(https://media1.tenor.com/m/7TsSID1mzUIAAAAd/glitter-purple.gif)"):(''),
                                 backgroundColor: 'white', minWidth: '40vh', padding: 2}}>
                     {tonConnectUI.wallet ? (
@@ -97,10 +97,12 @@ function WalletPage() {
                         </Box>
                     )}
                 </Button>
-                {tonConnectUI.wallet && <Button sx={{textTransform: 'none', backgroundColor: 'white', minWidth: '40vh', padding: 2, marginTop: 2, color: 'black'}} 
-                        onClick={() => {tonConnectUI.disconnect(); tonConnectUI.openModal()}}>
-                    <Typography fontWeight={"bold"} fontSize={20}>Change wallet</Typography>
-                </Button>}
+                <Box sx={{marginBottom: "30%"}}>
+                    {tonConnectUI.wallet && <Button sx={{textTransform: 'none', backgroundColor: 'white', minWidth: '40vh', padding: 2, marginTop: 2, color: 'black'}} 
+                            onClick={() => {tonConnectUI.disconnect(); tonConnectUI.openModal()}}>
+                        <Typography fontWeight={"bold"} fontSize={20}>Change wallet</Typography>
+                    </Button>}
+                </Box>
             </Box>
         </Slide>
     </Box>
