@@ -16,6 +16,7 @@ function App() {
         } else {
             clientStore.getUser(648698564)
         }
+        clientStore.getSettings()
         clientStore.getAirdrops()
         
     }, [])
@@ -23,9 +24,11 @@ function App() {
         <>
             <TonConnectUIProvider manifestUrl="https://raw.githubusercontent.com/ega666881/Rust-test/master/manifest.json">
                 <RoutesComponent />
-                <Box sx={{display: 'flex', justifyContent: 'center', position: 'fixed', bottom: 0, left: 0, right: 0}}>
-                    <NavBar activeButton={clientStore.activeButton}/>
-                </Box>
+                {!clientStore.hideNavBar && 
+                    <Box sx={{display: 'flex', justifyContent: 'center', position: 'fixed', bottom: 0, left: 0, right: 0}}>
+                        <NavBar activeButton={clientStore.activeButton}/>
+                    </Box>
+                }
             </TonConnectUIProvider>
         </>
         

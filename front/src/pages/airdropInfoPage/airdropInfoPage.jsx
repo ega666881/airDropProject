@@ -14,7 +14,12 @@ function AirDropInfoPage() {
     const [airdrop, setAirdrop] = useState(null)
     const [seconds, setSeconds] = useState(1);
     const [isActive, setIsActive] = useState(true);
+    const [airdropJoinded, setAirdropJoined] = useState(false)
     const [tab, setTab] = useState(1)
+    document.body.style.backgroundImage = ``
+    document.body.style.backgroundColor = `black`
+    const [errorMessage, setErrorMessage] = useState('')
+
     if (!airdrop) {
         clientStore.airdrops.map((airdrop) => {
             if (airdrop.id == id) {
@@ -23,6 +28,16 @@ function AirDropInfoPage() {
             }
         })
     }
+
+    
+
+    useEffect(() => {
+        clientStore.user.airdropsUsers.map((air) => {
+            if (air.airdropId === airdrop.id) {
+                setAirdropJoined(true)
+            }
+        })
+    }, [])
 
     const formatTime = (totalSeconds) => {
         const hours = Math.floor(totalSeconds / 3600);
@@ -56,7 +71,7 @@ function AirDropInfoPage() {
         <Slide direction='down' in={true} timeout={{enter: 800}}>
             <Box>
                 <Box sx={{marginTop: 5, display: 'flex', justifyContent: 'center'}}>
-                    <img src={airdrop.coinLogoUrl} width={"100%"}/>
+                    <img src={airdrop.coinLogoUrl} width={"230vh"}/>
                 </Box>
                 <Box>
                     <Box sx={{marginTop: 2}}>
@@ -65,18 +80,18 @@ function AirDropInfoPage() {
                     <Box sx={{marginTop: 2, display: 'flex', justifyContent: 'center'}}>
                         {/* <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"22px"} textAlign={"center"}>ACTIVE</Typography>
                         <Typography variant='h3' fontWeight={"bold"} letterSpacing={"0px"} color={"#767676"} fontSize={"22px"} textAlign={"center"}>Subscription</Typography> */}
-                        <Typography variant="h6" color={'#00E5FF'} fontSize={"40px"}>
+                        {seconds >= 0 && <Typography variant="h6" color={'#00E5FF'} fontSize={"40px"}>
                             {String(hours).padStart(2, '0')}:
                             {String(minutes).padStart(2, '0')}:
                             {String(remainingSeconds).padStart(2, '0')}
-                        </Typography>
+                        </Typography>}
                     </Box>
                 </Box>
             </Box>
             
         </Slide>
         <Slide direction='up' in={true} timeout={{enter: 800}}>
-            <Box sx={{marginTop: -4, maxHeight: "100%", overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF'}}>
+            <Box sx={{marginTop: -4, maxHeight: "100%", overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', width: '100%s'}}>
                 <Tabs aria-label="basic tabs example"
                         value={tab}
                         onChange={handleChange}
@@ -98,9 +113,32 @@ function AirDropInfoPage() {
                         </Box>
                     )}
                 </Box>
-                <Box sx={{display: 'flex', justifyContent: 'center', alignSelf: 'center', marginTop: 2}}>
-                    <Button sx={{textTransform: 'none', backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, width: "50%"}} 
-                        onClick={() => navigate(`/miniGame/${airdrop.id}`)}>JOIN AIRDROP</Button>
+                <Typography fontWeight={"regular"} letterSpacing={"2.23px"} color={"red"} fontSize={"20px"} textAlign={"start"}>{errorMessage}</Typography>
+                <Box sx={{display: 'flex', justifyContent: 'center', alignSelf: 'center', marginTop: 2, marginBottom: "40%", width: "100%"}}>
+                    {airdropJoinded ? (<>{airdrop.stoped ? (<>
+                        <Button sx={{textTransform: 'none', backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, width: "50%"}} 
+                                >NOW</Button>
+                    </>):(
+                        <>
+                        {airdrop.miniGame ? (
+                            <Button sx={{textTransform: 'none', backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, width: "50%"}} 
+                        onClick={() => navigate(`/miniGame/${airdrop.id}`)}>PLAY GAME</Button>
+                        ):(
+                            <Button sx={{textTransform: 'none', backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, width: "50%"}} 
+                                >YOU JOINED AIRDROP</Button>
+                        )}</>
+                    )}
+                        </>
+                    ):(
+                        <Box sx={{display: 'flex', flexDirection: 'column', width: "100%", justifyContent: 'center', alignItems: 'center', gap: 2}}>
+                            {airdrop.subscribeCheck && 
+                                <a style={{textTransform: 'none', backgroundColor: '#00E5FF', color: 'white', borderRadius: 24, fontSize: 20, padding: 14, width: "50%", textAlign: 'center'}} 
+                                    href={airdrop.channelUrl}>JOIN CHANNEL</a>
+                            }
+                            <Button sx={{textTransform: 'none', backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, width: "50%"}} 
+                        onClick={() => {clientStore.joinAirdrop(airdrop.id, setAirdropJoined, setErrorMessage)}}>JOIN AIRDROP</Button>
+                        </Box>
+                    )}
                 </Box>
             </Box>
         </Slide>

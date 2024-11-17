@@ -25,7 +25,7 @@ function HomePage() {
               <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"53px"} textAlign={"center"}>{clientStore.user.username}</Typography>
             </Box>
             <Box sx={{marginTop: 2}}>
-              <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"22px"} textAlign={"center"}>ACTIVE</Typography>
+              <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"22px"} textAlign={"center"}>{clientStore.user.subscription ? (<>ACTIVE</>):(<>INACTIVE</>)}</Typography>
               <Typography variant='h3' fontWeight={"bold"} letterSpacing={"0px"} color={"#767676"} fontSize={"22px"} textAlign={"center"}>Subscription</Typography>
             </Box>
           </Box>

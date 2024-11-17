@@ -12,15 +12,20 @@ function MiniGamePage() {
     const [airdrop, setAirdrop] = useState(null)
     const [images, setImages] = useState([]);
     const [count, setCount] = useState(0)
-    const [seconds, setSeconds] = useState(5);
+    const [seconds, setSeconds] = useState(60);
     const [isActive, setIsActive] = useState(true);
-
+    if (airdrop) {
+        
+        document.body.style.backgroundImage = `url(${airdrop.backgroundUrl})`
+    }
+    
     const navigate = useNavigate()
 
-    if (seconds <= 0) {
-        navigate(`/airdropInfo/${airdrop.id}`)
-    }
+    useEffect(() => {
+        clientStore.setHideNavBar(true)
+    }, [])
 
+    
     if (!airdrop) {
         clientStore.airdrops.map((airdrop) => {
             if (airdrop.id == id) {
@@ -48,6 +53,14 @@ function MiniGamePage() {
             
             clearInterval(interval);
         }
+        if (seconds <= 0) {
+        
+            clientStore.setHideNavBar(false)
+            
+            navigate(`/airdropInfo/${airdrop.id}`)
+            clientStore.addCoins(airdrop.id, Number(count))
+        }
+    
         return () => clearInterval(interval);
       }, [isActive, seconds]);
 
@@ -108,7 +121,7 @@ function MiniGamePage() {
                             width: '100%',
                             cursor: 'pointer'
                         }}
-                        onClick={(e) => {handleImageClick(image.id, e)}}
+                        onTouchStart={(e) => {handleImageClick(image.id, e)}}
                     />
                 </Box>
             ))}
