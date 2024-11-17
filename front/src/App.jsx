@@ -22,7 +22,7 @@ function App() {
     }, [])
     return (
         <>
-            <TonConnectUIProvider manifestUrl="https://raw.githubusercontent.com/ega666881/Rust-test/master/manifest.json">
+            <TonConnectUIProvider manifestUrl="https://raw.githubusercontent.com/ega666881/Rust-test/refs/heads/main/manifest.json">
                 <RoutesComponent />
                 {!clientStore.hideNavBar && 
                     <Box sx={{display: 'flex', justifyContent: 'center', position: 'fixed', bottom: 0, left: 0, right: 0}}>
