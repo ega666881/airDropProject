@@ -2,17 +2,34 @@
 
 
 export interface IUser {
-    id: number;
-    tgId: number;
-    balance: number;
-    subscription: boolean;
-    username: string;
+    id?: number;
+    tgId?: number;
+    balance?: number;
+    subscription?: boolean;
+    username?: string;
+    wallet?: string;
+    discount?: number;
 }
 
-export interface IAirdrop {
+export interface ITransaction {
     id: number;
-    name: string;
-    subscribeCheck: boolean;
+    userId: number;
+    amount: number;
+    active: boolean;
+    wallet: string;
+}
+
+export interface ISettings {
+    id: number;
+    subscribeCost: number;
+    discount: number;
+  }
+  
+
+export interface IAirdrop {
+    id?: number;
+    name?: string;
+    subscribeCheck?: boolean;
     channelId?: number | null;
     miniGame?: boolean;
     coinLogoUrl?: string | null;
@@ -20,7 +37,9 @@ export interface IAirdrop {
     totalCoins: number;
     projectInfo: string;
     channelUrl?: string | null;
-    endDate: number;
+    endDate?: number;
+    maxUsers?: number;
+    stoped?: boolean;
 }
 
 export interface IAirdropUser {

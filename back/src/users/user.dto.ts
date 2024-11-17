@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsOptional, IsString, IsNumber, IsDateString, MinLength, Matches, IsEmail, isNotEmpty, MaxLength, IsInt, Min, Validate, IsBoolean } from "class-validator"
 import {Type} from "class-transformer"
 import { ApiProperty } from "@nestjs/swagger";
-import { UserExistsByEmailRule, UserExistsByIdRule, UserExistsRule, CourseExistsRule } from "./users.validator";
+import { UserExistsByEmailRule, UserExistsByIdRule, UserExistsRule, CourseExistsRule, AirdropExistsByIdRule } from "./users.validator";
 
 
 
@@ -11,6 +11,58 @@ export class CreateUserDto {
     @IsNotEmpty()
     readonly tgId: number
 }
+
+export class AddWalletUserDto {
+    @IsNumber()
+    @ApiProperty()
+    @Validate(UserExistsRule)
+    @IsNotEmpty()
+    readonly tgId: number
+    @IsString()
+    @ApiProperty()
+    @IsNotEmpty()
+    readonly wallet: string
+}
+
+export class JoinAirdropDto {
+    @IsNumber()
+    @ApiProperty()
+    @Validate(UserExistsByIdRule)
+    @IsNotEmpty()
+    readonly userId: number
+    @IsNumber()
+    @ApiProperty()
+    @Validate(AirdropExistsByIdRule)
+    @IsNotEmpty()
+    readonly airdropId: number
+}
+
+export class AddCoinsDto {
+    @IsNumber()
+    @ApiProperty()
+    @Validate(UserExistsByIdRule)
+    @IsNotEmpty()
+    readonly userId: number
+    @IsNumber()
+    @ApiProperty()
+    @Validate(AirdropExistsByIdRule)
+    @IsNotEmpty()
+    readonly airdropId: number
+    @IsNumber()
+    @ApiProperty()
+    @IsNotEmpty()
+    readonly coins: number
+}
+
+
+export class CreateTransactionDto {
+    @IsNumber()
+    @ApiProperty()
+    @Validate(UserExistsByIdRule)
+    @IsNotEmpty()
+    readonly userId: number
+}
+
 
 export class BuyCourseDto {
     @IsNumber()
@@ -60,17 +112,6 @@ export class AddCourseDto {
     readonly cost: number
 }
 
-export class CreateTransactionDto {
-    @IsNumber()
-    @ApiProperty()
-    @Validate(UserExistsRule)
-    @IsNotEmpty()
-    readonly tgId: number
-    @IsNumber()
-    @ApiProperty()
-    @IsNotEmpty()
-    readonly amount: number
-}
 
 export class AddBalanceDto {
     @IsNumber()

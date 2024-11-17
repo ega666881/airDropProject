@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import knex, { Knex } from 'knex';
 import knexfile from '../../db/knexfile';
 import { CreateUserDto } from "./user.dto";
-import { IUser, IAirdrop, IAirdropUser, IAirdropHistory, IReferal } from './interfaces';
+import { IUser, IAirdrop, IAirdropUser, IAirdropHistory, IReferal, ITransaction, ISettings } from './interfaces';
 import { KnexService } from "./user.knex";
 
 @Injectable()
@@ -12,7 +12,9 @@ export class UserRepository {
         airdrops: "airdrops",
         airdropsUsers: "airdropsUsers",
         airdropsHistory: "airdropsHistory",
-        referals: "referals"
+        referals: "referals",
+        transactions: "transactions",
+        settings: "settings"
     };
     knex: Knex;
     constructor(private readonly knexService: KnexService) {
@@ -25,24 +27,79 @@ export class UserRepository {
 
     }
 
+    async createTransaction(userId: number, amount: number = 0.1): Promise<ITransaction> {
+        const transaction = await this.knex(this.tableNames.transactions).insert({userId: userId, amount: amount}).returning('*')
+        return transaction[0]
+    }
+
+    async getCountAirdropsUsers(airdropId: number) {
+        return this.knex(this.tableNames.airdropsUsers).count().where({airdropId: airdropId}).first()
+    }
+
     async addBalanceUser(tgId: number, amount: number) {
         await this.knex(this.tableNames.users).update({balance: this.knex.raw(`balance + ${amount}`)}).where({tgId: tgId})
         return true
     }
 
-    async getAirdrops(id?: number) {
+    async getSettings(): Promise<ISettings> {
+        return this.knex(this.tableNames.settings).select('*').first()
+    }
+
+    async getAirdrops(id?: number): Promise<IAirdrop> {
         const query = this.knex(this.tableNames.airdrops).select('*')
         id && query.where({id: id}).first()
+        //@ts-ignore
         return query
 
     }   
 
-    async getUser(userId?: number, tgId?: number): Promise<IUser | IUser[]> {
-        const airdropsSubquery = this.knex('airdropsHistory')
-        .select('userId')
-        .groupBy('userId')
-        .select(this.knex.raw('json_agg("airdropsHistory") AS "airdropsHistory"'));
+    async getTransactions(userId: number) {
+        return this.knex(this.tableNames.transactions).select('*').where({userId: userId, active: true})
+    }
 
+    async getTransactionById(id: number) {
+        return this.knex(this.tableNames.transactions).select('*').where({id: id, active: true}).first()
+    }
+
+    async addAirdropsUsers(airdropId: number, userId: number) {
+        return this.knex(this.tableNames.airdropsUsers).insert({airdropId: airdropId, userId: userId})
+    }
+
+    async setTransactionInactive(transactionId: number) {
+        return this.knex(this.tableNames.transactions).update({active: false}).where({id: transactionId})
+    }
+
+    async updateAirdrop(updatedData: object, airdropId: number) {
+        return this.knex(this.tableNames.airdrops).update(updatedData).where({id: airdropId})
+    }
+
+    async updateUser(updatedData: IUser, userId?: number, tgId?: number) {
+        const query = this.knex(this.tableNames.users).update(updatedData)
+        userId && query.where({id: userId})
+        tgId && query.where({tgId: tgId})
+        await query
+        return true
+    }
+
+    async addCoinsAirdrop(userId: number, airdropId: number, coins: number) {
+        await this.knex(this.tableNames.airdropsUsers).update({coins: this.knex.raw(`coins + ${coins}`)}).where({userId: userId, airdropId: airdropId})
+        return true
+    }
+
+    async getAirdropsUsers(userId: number, airdropId: number) {
+        return this.knex(this.tableNames.airdropsUsers).select('*').where({userId: userId, airdropId: airdropId}).first()
+    }
+
+    async getUser(userId?: number, tgId?: number): Promise<IUser> {
+        const airdropsSubquery = this.knex('airdropsHistory')
+            .select('userId')
+            .groupBy('userId')
+            .select(this.knex.raw('json_agg("airdropsHistory") AS "airdropsHistory"'));
+
+        const airdropsUsersSubquery = this.knex('airdropsUsers')
+            .select('userId')
+            .groupBy('userId')
+            .select(this.knex.raw('json_agg("airdropsUsers") AS "airdropsUsers"'));
 
         const referralsSubquery = this.knex('referals')
             .join('users', 'users.id', 'referals.referalId')
@@ -53,21 +110,25 @@ export class UserRepository {
         const query = this.knex('users as u')
             .leftJoin(airdropsSubquery.as('airdrops'), 'airdrops.userId', 'u.id')
             .leftJoin(referralsSubquery.as('referrals'), 'referrals.userId', 'u.id')
+            .leftJoin(airdropsUsersSubquery.as('airdropsUsers1'), 'airdropsUsers1.userId', 'u.id')
             .select(
                 'u.*',
-                this.knex.raw(`COALESCE(airdrops."airdropsHistory", '[]'::json) AS airdropsHistory`),
-                this.knex.raw(`COALESCE(referrals.referals, '[]'::json) AS referals`)
+                this.knex.raw(`COALESCE("airdropsUsers1"."airdropsUsers", '[]'::json) AS "airdropsUsers"`),
+                this.knex.raw(`COALESCE(airdrops."airdropsHistory", '[]'::json) AS "airdropsHistory"`),
+                this.knex.raw(`COALESCE(referrals.referals, '[]'::json) AS referals`),
+                
             )
             .orderBy('u.id', 'asc')
             
-            console.log(query.toQuery())
+            
             if (userId) {
                 query.where('u.id', userId).first()
+                //@ts-ignore
                 return query
             } else if (tgId) {
                 query.where('u.tgId', tgId).first()
             }
-        
+        //@ts-ignore
         return query
     }
 

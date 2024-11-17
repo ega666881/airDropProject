@@ -104,3 +104,28 @@ export class UserExistsByEmailRule implements ValidatorConstraintInterface {
         return `Пользователя не существует.`;
     }
 }
+
+@ValidatorConstraint({ name: 'AirdropExistsById', async: true })
+@Injectable()
+export class AirdropExistsByIdRule implements ValidatorConstraintInterface {
+    knex: Knex
+    constructor() {
+        this.knex = knex(knexfile.development)
+    }
+
+    async validate(value: number) {
+        const user = await this.knex('airdrops').select("*").where({id: value}).first()
+        if (user) {
+            return true
+            
+        } else {
+            return false
+        }
+
+        
+    }
+
+    defaultMessage(args: ValidationArguments) {
+        return `Аирдропа не существует.`;
+    }
+}

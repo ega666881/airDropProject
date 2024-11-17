@@ -14,7 +14,7 @@ export async function up(knex: Knex): Promise<void> {
         table.increments('id').primary()
         table.string('name').notNullable().defaultTo('')
         table.boolean('subscribeCheck').notNullable().defaultTo(false)
-        table.integer('channelId').nullable()
+        table.string('channelId').nullable()
         table.boolean('miniGame').defaultTo(false)
         table.string('coinLogoUrl').nullable()
         table.string('backgroundUrl').nullable()
