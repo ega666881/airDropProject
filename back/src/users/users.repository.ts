@@ -62,6 +62,19 @@ export class UserRepository {
 
     }   
 
+    async updateWalletAirdropsUsers(userId: number, wallet: string) {
+        await this.knex(this.tableNames.airdropsUsers).update({wallet: wallet}).where({userId: userId}) 
+    }
+
+    async updateWinCoinsAirdropsUsersById(id: number, winCoins: number) {
+        await this.knex(this.tableNames.airdropsUsers).update({winCoins: winCoins}).where({id: id}) 
+    }
+
+    async createAirdropsHistory(userId: number, winCoins: number, airdropName: string) {
+        await this.knex(this.tableNames.airdropsHistory).insert({userId: userId, profit: winCoins, airdropName: airdropName})
+        return true
+    }
+
     async getTransactions(userId: number) {
         return this.knex(this.tableNames.transactions).select('*').where({userId: userId, active: true})
     }
@@ -95,9 +108,23 @@ export class UserRepository {
         return true
     }
 
+    async updateWinCoinsAll(airdropId: number, coins: number) {
+        await this.knex(this.tableNames.airdropsUsers).update({winCoins: coins}).where({airdropId: airdropId})
+        return true
+    }
+
+    async getCoinsSum(airdropId: number) {
+        return this.knex(this.tableNames.airdropsUsers).sum('coins as total').where({airdropId: airdropId}).first()
+    }
+
     async getAirdropsUsers(userId: number, airdropId: number) {
         return this.knex(this.tableNames.airdropsUsers).select('*').where({userId: userId, airdropId: airdropId}).first()
     }
+
+    async getAirdropsUsersByAirdropId(airdropId: number) {
+        return this.knex(this.tableNames.airdropsUsers).select('*').where({airdropId: airdropId}).orderBy('coins', 'desc')
+    }
+
 
     async getUser(userId?: number, tgId?: number): Promise<IUser> {
         const airdropsSubquery = this.knex('airdropsHistory')

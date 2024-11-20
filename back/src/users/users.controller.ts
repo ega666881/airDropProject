@@ -24,7 +24,7 @@ import {
 import { UsersService } from './users.service';
 import { ApiBearerAuth, ApiHeader, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ActiveTokenGuard } from 'src/middlewares/auth.middleware';
-import { AddBalanceDto, AddCoinsDto, AddCourseDto, AddWalletUserDto, BuyCourseDto, CreateTransactionDto, CreateUserDto, JoinAirdropDto } from './user.dto';
+import { AddBalanceDto, AddCoinsDto, AddCourseDto, AddWalletUserDto, BuyCourseDto, CreateTransactionDto, CreateUserDto, JoinAirdropDto, StopAirdropDto } from './user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -73,6 +73,18 @@ export class UsersController {
   @Post('/create-user')
   async createUser(@Body() dto: CreateUserDto) {
     return this.userService.createUser(dto)
+  }
+
+  @ApiTags('users')
+  @Post('/finish-airdrop')
+  async finishAirdrop(@Body() dto: StopAirdropDto) {
+    return this.userService.finishAirdrop(dto)
+  }
+
+  @ApiTags('users')
+  @Put('/stop-airdrop')
+  async stopAirdrop(@Body() dto: StopAirdropDto) {
+    return this.userService.stopAirdrop(dto)
   }
 
   @ApiTags('users')

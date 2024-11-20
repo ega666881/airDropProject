@@ -5,7 +5,7 @@ import { genSaltSync, hashSync, compareSync } from 'bcrypt';
 import * as dotenv from 'dotenv-ts';
 
 import { UserRepository } from './users.repository';
-import { AddBalanceDto, AddCoinsDto, AddCourseDto, AddWalletUserDto, BuyCourseDto, CreateTransactionDto, CreateUserDto, JoinAirdropDto} from './user.dto';
+import { AddBalanceDto, AddCoinsDto, AddCourseDto, AddWalletUserDto, BuyCourseDto, CreateTransactionDto, CreateUserDto, JoinAirdropDto, StopAirdropDto} from './user.dto';
 import TonWeb from 'tonweb'
 import { KnexService } from './user.knex';
 import { IUser, IAirdrop, IAirdropUser, IAirdropHistory, IReferal } from './interfaces';
@@ -65,13 +65,40 @@ export class UsersService {
   }
 
   async addWalletUser(dto: AddWalletUserDto) { 
-    await this.userRepository.updateUser({wallet: dto.wallet}, undefined, dto.tgId)
-    return this.userRepository.getUser(undefined, dto.tgId)
+    await this.userRepository.updateUser({wallet: dto.wallet}, dto.userId)
+    await this.userRepository.updateWalletAirdropsUsers(dto.userId, dto.wallet)
+    return this.userRepository.getUser(dto.userId)
   }
 
   async addCoins(dto: AddCoinsDto) {
     await this.userRepository.addCoinsAirdrop(dto.userId, dto.airdropId, dto.coins)
     return this.userRepository.getUser(dto.userId)
+  }
+
+  async finishAirdrop(dto: StopAirdropDto) {
+    const airdrop = await this.userRepository.getAirdrops(dto.airdropId)
+    if (airdrop.miniGame) {
+      const airdropsUsers = await this.userRepository.getAirdropsUsersByAirdropId(dto.airdropId)
+      const {total} = await this.userRepository.getCoinsSum(dto.airdropId)
+      airdropsUsers.map( async (airdropUser) => {
+        const winCoins = Math.round(airdropUser.coins / total * airdrop.totalCoins)
+        await this.userRepository.updateWinCoinsAirdropsUsersById(airdropUser.id, winCoins)
+        await this.userRepository.createAirdropsHistory(airdropUser.userId, winCoins, airdrop.name)
+      })
+      return {success: true}
+
+    } else {
+      const {count} = await this.userRepository.getCountAirdropsUsers(airdrop.id)
+      const winCoins = airdrop.totalCoins / Number(count)
+      await this.userRepository.updateWinCoinsAll(airdrop.id, winCoins)
+      // await this.userRepository.createAirdropsHistory(airdropUser.userId, 1, airdrop.name)
+      return {success: true}
+    } 
+     
+  }
+ 
+  async stopAirdrop(dto: StopAirdropDto) {
+    await this.userRepository.updateAirdrop({stoped: true}, dto.airdropId)
   }
 
   async getSettings() {
@@ -87,6 +114,9 @@ export class UsersService {
       throw new HttpException("Пользователь уже в эйрдропе", HttpStatus.BAD_REQUEST)
 
     } else {
+      if (!user.subscription) {
+        throw new HttpException("У пользователя нету подписки", HttpStatus.CONFLICT)
+      }
       //@ts-ignore
       if (count >= airdrop.maxUsers) {
         throw new HttpException('Количество пользователей максимум', HttpStatus.CONFLICT)
@@ -103,7 +133,6 @@ export class UsersService {
             tgId: user.tgId
           })})
           const data = await response.json()
-          console.log(data)
           if (data.check) {
             await this.userRepository.addAirdropsUsers(dto.airdropId, dto.userId)
             return this.userRepository.getUser(dto.userId)
@@ -123,7 +152,13 @@ export class UsersService {
 
   async getUserByTgId(tgId: number): Promise<IUser | IUser[]> {
     let user = await this.userRepository.getUser(undefined, tgId)
-    if (!user) {
+    if (user.subscription) {
+      if (Math.floor((new Date().getTime()) / 1000) >= user.subscribeEndDate) {
+        await this.userRepository.updateUser({subscribeEndDate: 0, subscription: false}, user.id)
+      }
+      
+    }
+    if (!user) { 
       throw new HttpException("Пользователь не найден", HttpStatus.NOT_FOUND)
     }
     //@ts-ignore
@@ -138,7 +173,7 @@ export class UsersService {
             const trx = await this.userRepository.getTransactionById(Number(msg.message))
             if (trx) {
               await this.userRepository.setTransactionInactive(trx.id)
-              await this.userRepository.updateUser({subscription: true}, trx.userId)
+              await this.userRepository.updateUser({subscription: true, subscribeEndDate: this.knex.raw(`subscribeEndDate + ${Math.floor((new Date().getTime() + 2629746) / 1000)}`)}, trx.userId)
               const updatedUser = await this.userRepository.getUser(trx.userId)
               //@ts-ignore
               const referal = await this.knex('referals').select('*').leftJoin('users', 'users.id', 'referals.userId').where({referalId: updatedUser.id}).first()

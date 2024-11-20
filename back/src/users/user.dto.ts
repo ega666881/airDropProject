@@ -24,9 +24,9 @@ export class CreateUserDto {
 export class AddWalletUserDto {
     @IsNumber()
     @ApiProperty()
-    @Validate(UserExistsRule)
+    @Validate(UserExistsByIdRule)
     @IsNotEmpty()
-    readonly tgId: number
+    readonly userId: number
     @IsString()
     @ApiProperty()
     @IsNotEmpty()
@@ -45,6 +45,15 @@ export class JoinAirdropDto {
     @IsNotEmpty()
     readonly airdropId: number
 }
+
+export class StopAirdropDto {
+    @IsNumber()
+    @ApiProperty()
+    @Validate(AirdropExistsByIdRule)
+    @IsNotEmpty()
+    readonly airdropId: number
+}
+
 
 export class AddCoinsDto {
     @IsNumber()

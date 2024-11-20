@@ -9,6 +9,8 @@ export interface IUser {
     username?: string;
     wallet?: string;
     discount?: number;
+    subscribeEndDate?: number | any;
+    admin?: boolean;
 }
 
 export interface ITransaction {
@@ -40,12 +42,15 @@ export interface IAirdrop {
     endDate?: number;
     maxUsers?: number;
     stoped?: boolean;
+    winCoins?: number | any;
 }
 
 export interface IAirdropUser {
     id: number;
     userId: number;
     airdropId: number;
+    coins: number;
+    wallet: string;
 }
 
 export interface IAirdropHistory {
