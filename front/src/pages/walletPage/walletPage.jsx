@@ -65,7 +65,7 @@ function WalletPage() {
     return <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 3}}>
         <Slide direction='down' in={true} timeout={{enter: 800}}>
             <Box>
-                <Box sx={{marginTop: 5, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <Box sx={{marginTop: 0, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <img src={mediaManager('tonLogo')} sizes=''/>
                 </Box>
                 <Box sx={{marginTop: 2}}>
@@ -77,7 +77,7 @@ function WalletPage() {
             </Box>
         </Slide>
         <Slide direction='up' in={true} timeout={{enter: 800}}>
-            <Box sx={{marginTop: 7, maxHeight: 250, overflowX: 'hidden', scrollbarColor: '#00E5FF'}}>
+            <Box sx={{marginTop: 7, maxHeight: 350, overflowX: 'hidden', scrollbarColor: '#00E5FF'}}>
                 <Button sx={{textTransform: 'none', backgroundImage: tonConnectUI.wallet ? ("url(https://media1.tenor.com/m/7TsSID1mzUIAAAAd/glitter-purple.gif)"):(''),
                                 backgroundColor: 'white', minWidth: '40vh', padding: 2}}>
                     {tonConnectUI.wallet ? (

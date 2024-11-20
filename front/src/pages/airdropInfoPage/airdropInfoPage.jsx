@@ -15,6 +15,7 @@ function AirDropInfoPage() {
     const [seconds, setSeconds] = useState(1);
     const [isActive, setIsActive] = useState(true);
     const [airdropJoinded, setAirdropJoined] = useState(false)
+    const [infoMessage, setMessage] = useState('')
     const [tab, setTab] = useState(1)
     document.body.style.backgroundImage = ``
     document.body.style.backgroundColor = `black`
@@ -80,11 +81,16 @@ function AirDropInfoPage() {
                     <Box sx={{marginTop: 2, display: 'flex', justifyContent: 'center'}}>
                         {/* <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"22px"} textAlign={"center"}>ACTIVE</Typography>
                         <Typography variant='h3' fontWeight={"bold"} letterSpacing={"0px"} color={"#767676"} fontSize={"22px"} textAlign={"center"}>Subscription</Typography> */}
-                        {seconds >= 0 && <Typography variant="h6" color={'#00E5FF'} fontSize={"40px"}>
-                            {String(hours).padStart(2, '0')}:
-                            {String(minutes).padStart(2, '0')}:
-                            {String(remainingSeconds).padStart(2, '0')}
-                        </Typography>}
+                        
+                        {airdrop.stoped ? (
+                            <Typography sx={{backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, textAlign: 'center', width: "100%"}}>NOW</Typography>
+                        ):(<>
+                            {seconds >= 0 && <Typography variant="h6" color={'#00E5FF'} fontSize={"40px"}>
+                                {String(hours).padStart(2, '0')}:
+                                {String(minutes).padStart(2, '0')}:
+                                {String(remainingSeconds).padStart(2, '0')}
+                            </Typography>}
+                        </>)}
                     </Box>
                 </Box>
             </Box>
@@ -116,8 +122,14 @@ function AirDropInfoPage() {
                 <Typography fontWeight={"regular"} letterSpacing={"2.23px"} color={"red"} fontSize={"20px"} textAlign={"start"}>{errorMessage}</Typography>
                 <Box sx={{display: 'flex', justifyContent: 'center', alignSelf: 'center', marginTop: 2, marginBottom: "40%", width: "100%"}}>
                     {airdropJoinded ? (<>{airdrop.stoped ? (<>
-                        <Button sx={{textTransform: 'none', backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, width: "50%"}} 
-                                >NOW</Button>
+                        {clientStore.user.admin && 
+                                <Box width={"100%"} sx={{display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'center'}}>
+                                    <Button sx={{textTransform: 'none', backgroundColor: '#63C67C', color: 'white', borderRadius: 24, fontSize: 20, padding: 1, width: "50%"}} 
+                                        onClick={() => clientStore.finishAirdrop(airdrop.id, setMessage)}>Finish airdrop
+                                    </Button>
+                                    <Typography color={"green"}>{infoMessage}</Typography>
+                                </Box>
+                        }
                     </>):(
                         <>
                         {airdrop.miniGame ? (

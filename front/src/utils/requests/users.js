@@ -46,9 +46,9 @@ export const addCoins = async (userId, airdropId, coins) => {
   };
   
 
-export const addWallet = async (tgId, wallet) => {
+export const addWallet = async (userId, wallet) => {
     try {
-        const response = await axios.put("/users/add-wallet", {tgId: tgId, wallet: wallet});
+        const response = await axios.put("/users/add-wallet", {userId: userId, wallet: wallet});
         return response;
 
     } catch (err) {
@@ -56,6 +56,19 @@ export const addWallet = async (tgId, wallet) => {
     }
     
   };
+
+  export const finishAirdrop = async (airdropId) => {
+    try {
+        const response = await axios.post("/users/finish-airdrop", {airdropId: airdropId});
+        return response;
+
+    } catch (err) {
+        return err.response;
+    }
+    
+  };
+
+
 
 
 export const joinAirdrop = async (userId, airdropId) => {

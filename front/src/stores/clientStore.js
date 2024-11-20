@@ -1,5 +1,5 @@
 import { action, makeAutoObservable, set } from "mobx";
-import { getAirdrops, getUser, createTransaction, joinAirdrop, addCoins, addWallet, getSettings } from "../utils/requests/users";
+import { getAirdrops, getUser, createTransaction, joinAirdrop, addCoins, addWallet, getSettings, finishAirdrop } from "../utils/requests/users";
 import axios from "../utils/axios";
 
 
@@ -38,12 +38,22 @@ class ClientStore {
     })
 
     addWallet = action(async (wallet) => {
-        const response = await addWallet(Number(this.user.tgId), wallet)
+        const response = await addWallet(Number(this.user.id), wallet)
         console.log(response.status)
         switch(response.status) {
             case 201: {
                 
                 
+            } 
+        }
+    })
+
+    finishAirdrop = action(async (airdropId, setMessage) => {
+        const response = await finishAirdrop(airdropId)
+        console.log(response.status)
+        switch(response.status) {
+            case 201: {
+                setMessage("Успех")
             } 
         }
     })
