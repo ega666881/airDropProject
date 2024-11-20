@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import traceback
 
-TELEGRAM_TOKEN = '7734073637:AAEY01wgogGBUCVRpaNjTVjihdFQJIxUJTQ'
+TELEGRAM_TOKEN = '7941437904:AAGevL9x___LLDo0JcSS_ZG_jqQz9ex6k20'
 bot = Bot(token=TELEGRAM_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher()
