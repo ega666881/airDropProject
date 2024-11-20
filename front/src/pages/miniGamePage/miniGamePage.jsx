@@ -70,7 +70,7 @@ function MiniGamePage() {
                 ...prevImages,
                 { id: Date.now(), left: Math.random() * 100, opacity: 1 },
             ]);
-        }, 1000); 
+        }, 500); 
 
         return () => clearInterval(interval);
     }, []);
@@ -118,7 +118,7 @@ function MiniGamePage() {
                         alt="Falling"
                         style={{
                             borderRadius: '50%',
-                            width: '100%',
+                            width: 100,
                             cursor: 'pointer'
                         }}
                         onTouchStart={(e) => {handleImageClick(image.id, e)}}
@@ -130,7 +130,7 @@ function MiniGamePage() {
                     0% {
                         transform: translateY(0) rotate(0deg);
                     }
-                    100% {
+                    50% {
                         transform: translateY(100vh) rotate(360deg);
                         opacity: 0;
                     }
