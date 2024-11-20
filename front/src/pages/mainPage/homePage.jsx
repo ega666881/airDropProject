@@ -32,7 +32,7 @@ function HomePage() {
         </Box>
       </Slide>
       <Slide direction='up' in={true} timeout={{enter: 800}}>
-        <Box sx={{marginTop: 7, maxHeight: 250, overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF'}}>
+        <Box sx={{marginTop: 7, maxHeight: 250, overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', marginBottom: "30%"}}>
           {clientStore.user.airdropsHistory.map((airdrop) => (
             <HistoryItem airdrop={airdrop}/>
           ))}

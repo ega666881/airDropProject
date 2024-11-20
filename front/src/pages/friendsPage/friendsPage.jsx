@@ -18,24 +18,30 @@ function FriendsPage() {
         </Box>
       </Slide>
       <Slide direction='up' in={true} timeout={{enter: 800}}>
-        <Box width={"100%"}>
-            <Box sx={{display: 'flex', gap: 1, marginTop: 6}}>
-                <img src={mediaManager('referalCountImage')}/>
-                <Typography fontWeight={"regular"} letterSpacing={"1.57px"} color={"white"} fontSize={"18px"} textAlign={"center"}>{clientStore.user.referals.length}</Typography>
-            </Box>
-            <Box sx={{display: 'flex', flexDirection: 'column', marginTop: 2, maxHeight: "60vh", overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', gap: 3, width: "100%"}}>
-                {clientStore.user.referals.map((referal, index) => (
-                  <ReferalItem referal={referal} count={index}/>
-                ))}
-            </Box>
+        <Box>
             <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%'}}>
-              <Button sx={{textTransform: 'none',backgroundColor: 'white', minWidth: '30vh', padding: 2}}>
-                        <a href={`https://t.me/share/url?url=https://t.me/SmartPandarobot?start=${clientStore.user.id}&text=`} sx={{textTransform: 'none', backgroundColor: 'white', minWidth: '40vh', padding: 2, color: 'white'}}>
-                    <Typography fontSize={20}>Invite Friends</Typography>
-                        </a>
-              </Button>
-            </Box>
-            
+                  <Button sx={{textTransform: 'none',backgroundColor: 'white', minWidth: '30vh', padding: 2}}>
+                            <a href={`https://t.me/share/url?url=https://t.me/SmartPandarobot?start=${clientStore.user.id}&text=`} sx={{textTransform: 'none', backgroundColor: 'white', minWidth: '40vh', padding: 2, color: 'white'}}>
+                        <Typography fontSize={20}>Invite Friends</Typography>
+                            </a>
+                  </Button>
+                </Box>
+
+          
+          <Box width={"100%"}>
+              
+              <Box sx={{display: 'flex', gap: 1, marginTop: 6}}>
+                  <img src={mediaManager('referalCountImage')}/>
+                  <Typography fontWeight={"regular"} letterSpacing={"1.57px"} color={"white"} fontSize={"18px"} textAlign={"center"}>{clientStore.user.referals.length}</Typography>
+              </Box>
+              <Box sx={{display: 'flex', flexDirection: 'column', marginTop: 2, maxHeight: "60vh", overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', gap: 3, width: "100%"}}>
+                  {clientStore.user.referals.map((referal, index) => (
+                    <ReferalItem referal={referal} count={index}/>
+                  ))}
+              </Box>
+              
+              
+          </Box>
         </Box>
       </Slide>
   </Box>
