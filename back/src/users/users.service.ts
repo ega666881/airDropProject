@@ -77,8 +77,8 @@ export class UsersService {
 
   async finishAirdrop(dto: StopAirdropDto) {
     const airdrop = await this.userRepository.getAirdrops(dto.airdropId)
+    const airdropsUsers = await this.userRepository.getAirdropsUsersByAirdropId(dto.airdropId)
     if (airdrop.miniGame) {
-      const airdropsUsers = await this.userRepository.getAirdropsUsersByAirdropId(dto.airdropId)
       const {total} = await this.userRepository.getCoinsSum(dto.airdropId)
       airdropsUsers.map( async (airdropUser) => {
         const winCoins = Math.round(airdropUser.coins / total * airdrop.totalCoins)
@@ -89,9 +89,11 @@ export class UsersService {
 
     } else {
       const {count} = await this.userRepository.getCountAirdropsUsers(airdrop.id)
-      const winCoins = airdrop.totalCoins / Number(count)
+      const winCoins = Math.round(airdrop.totalCoins / Number(count))
       await this.userRepository.updateWinCoinsAll(airdrop.id, winCoins)
-      // await this.userRepository.createAirdropsHistory(airdropUser.userId, 1, airdrop.name)
+      airdropsUsers.map(async (airdropUser) => {
+        await this.userRepository.createAirdropsHistory(airdropUser.userId, winCoins, airdrop.name)
+      })
       return {success: true}
     } 
      
