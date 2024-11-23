@@ -18,10 +18,10 @@ function AirDropPage() {
               {/* <img src={mediaManager('airdropLogo')}/> */}
             </Box>
             <Box sx={{marginTop: 2}}>
-              <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"36px"} textAlign={"center"}>Your subscription is</Typography>
+              <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"26px"} textAlign={"center"}>Your subscription is</Typography>
             </Box>
             <Box sx={{marginTop: 2}}>
-              <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"36px"} textAlign={"center"}>
+              <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"26px"} textAlign={"center"}>
                   {clientStore.user.subscription ? (<>active</>):(
                     <Button sx={{textTransform: 'none', backgroundImage: "url(https://media1.tenor.com/m/7TsSID1mzUIAAAAd/glitter-purple.gif)", backgroundColor: 'white', minWidth: '40vh', padding: 2}}>
                       <Box sx={{display: 'flex', alignItems: 'center', gap: 2,textTransform: 'none', color: 'black', width: "100%", justifyContent: 'center'}}

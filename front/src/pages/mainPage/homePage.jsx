@@ -17,12 +17,12 @@ function HomePage() {
         <Box maxWidth={"100%"}>
           <Box>
             <Box sx={{marginTop: 5, display: 'flex', justifyContent: 'center'}}>
-              <img src={mediaManager('logoIcon')} sizes=''/>
+              <img src={mediaManager('logoIcon')} width={"50%"}/>
             </Box>
           </Box>
           <Box>
             <Box sx={{marginTop: 2, maxWidth: "100%"}}>
-              <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"53px"} textAlign={"center"}>{clientStore.user.username}</Typography>
+              <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"40px"} textAlign={"center"}>{clientStore.user.username}</Typography>
             </Box>
             <Box sx={{marginTop: 2}}>
               <Typography variant='h3' fontWeight={"bold"} letterSpacing={"2.23px"} color={"#FA9817"} fontSize={"22px"} textAlign={"center"}>{clientStore.user.subscription ? (<>ACTIVE</>):(<>INACTIVE</>)}</Typography>
@@ -32,7 +32,7 @@ function HomePage() {
         </Box>
       </Slide>
       <Slide direction='up' in={true} timeout={{enter: 800}}>
-        <Box sx={{marginTop: 7, maxHeight: 250, overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', marginBottom: "30%"}}>
+        <Box sx={{marginTop: 7, maxHeight: 300, overflowY: 'auto', overflowX: 'hidden', scrollbarColor: '#00E5FF', marginBottom: "30%", width: '100%'}}>
           {clientStore.user.airdropsHistory.map((airdrop) => (
             <HistoryItem airdrop={airdrop}/>
           ))}

@@ -10,7 +10,7 @@ function ReferalItem({referal, count}) {
     const navigate = useNavigate()
     return  <Box sx={{display: 'flex', flexDirection: 'row', width: "100%", justifySelf: 'center', marginLeft: 0, gap: 2, borderBottom: "1px solid",borderColor: "rgba(255, 255, 255, 0.3)", minWidth: '100%',
     padding: 1,  paddingBottom: 3}}>
-      <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+      <Box sx={{display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'space-between'}}>
         <Typography color={"white"} fontSize={22} fontWeight={"Bold"} textAlign={'center'}>{count + 1}</Typography>
         <Box position="relative" display="inline-block">
             <img src={mediaManager('referalAvatar')} style={{ width: '100%', height: 'auto' }} alt="Referal Avatar" />
