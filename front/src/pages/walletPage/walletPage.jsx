@@ -66,10 +66,10 @@ function WalletPage() {
         <Slide direction='down' in={true} timeout={{enter: 800}}>
             <Box>
                 <Box sx={{marginTop: 0, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <img src={mediaManager('tonLogo')} sizes=''/>
+                    <img src={mediaManager('tonLogo')} width={"50%"}/>
                 </Box>
                 <Box sx={{marginTop: 2}}>
-                    <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"53px"} textAlign={"center"}>Connect TON wallet</Typography>
+                    <Typography variant='h1' fontWeight={"bold"} letterSpacing={"2.23px"} color={"white"} fontSize={"40px"} textAlign={"center"}>Connect TON wallet</Typography>
                 </Box>
                 <Box sx={{marginTop: 2}}>
 
@@ -83,8 +83,8 @@ function WalletPage() {
                     {tonConnectUI.wallet ? (
                         <Box sx={{display: 'flex', alignItems: 'center', gap: 2,textTransform: 'none', color: 'black', width: "100%", justifyContent: 'center'}}
                             onClick={sendTrans}>
-                            <Typography fontWeight={"bold"} fontSize={25}>Buy subscription <br />{clientStore.subscribeDiscount ? (<>
-                                <Typography fontWeight={"bold"} fontSize={25} sx={{textDecoration: 'line-through'}}>
+                            <Typography fontWeight={"bold"} fontSize={21}>Buy subscription <br />{clientStore.subscribeDiscount ? (<>
+                                <Typography fontWeight={"bold"} fontSize={21} sx={{textDecoration: 'line-through'}}>
                                     {clientStore.settings.subscribeCost} TON
                                 </Typography>
                                 {clientStore.subscribeDiscount} TON 
