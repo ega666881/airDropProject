@@ -16,9 +16,9 @@ function NavBar({activeButton}) {
 
     return  <Box sx={{display: 'flex', flexDirection: 'row', marginTop: 5, backgroundColor: 'black', width: '100%', justifyContent: 'center'}}>
         <Button onClick={() => changeActiveButton('')}><img src={activeButton === '' ? (mediaManager('homeIconActive')):(mediaManager('homeIcon'))}/></Button>
-        <Button onClick={() => changeActiveButton('airdrop')}><img src={activeButton === 'airdrop' ? (mediaManager('airdropIconActive')):(mediaManager('airdropIcon'))}/></Button>
-        <Button onClick={() => changeActiveButton('friends')}><img src={activeButton === 'friends' ? (mediaManager('friendsIconActive')):(mediaManager('friendsIcon'))}/></Button>
-        <Button onClick={() => changeActiveButton('wallet')}><img src={activeButton === 'wallet' ? (mediaManager('walletIconActive')):(mediaManager('walletIcon'))}/></Button>
+        <Button onClick={() => changeActiveButton('airdrop')}><img src={activeButton === 'airdrop' ? (mediaManager('airdropIconActive')):(mediaManager('airdropIcon'))} width={"50%"}/></Button>
+        <Button onClick={() => changeActiveButton('friends')}><img src={activeButton === 'friends' ? (mediaManager('friendsIconActive')):(mediaManager('friendsIcon'))} width={"50%"}/></Button>
+        <Button onClick={() => changeActiveButton('wallet')}><img src={activeButton === 'wallet' ? (mediaManager('walletIconActive')):(mediaManager('walletIcon'))} width={"50%"}/></Button>
     </Box>
 }
 
