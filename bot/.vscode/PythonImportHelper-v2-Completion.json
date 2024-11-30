@@ -234,7 +234,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "TELEGRAM_TOKEN = '7941437904:AAGevL9x___LLDo0JcSS_ZG_jqQz9ex6k20'\nbot = Bot(token=TELEGRAM_TOKEN)\nstorage = MemoryStorage()\ndp = Dispatcher()\napp = FastAPI()\nclass MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():",
+        "peekOfCode": "TELEGRAM_TOKEN = '8179467877:AAE8vwnrj_8KsnOlOVkQqpeV3i-_I2lKDIM'\nbot = Bot(token=TELEGRAM_TOKEN)\nstorage = MemoryStorage()\ndp = Dispatcher()\napp = FastAPI()\nclass MessageRequest(BaseModel):\n    channelId: str\n    tgId: str\n@app.on_event(\"startup\")\nasync def startup():",
         "detail": "main",
         "documentation": {}
     },
